@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabbed Form</title>
+    <style>
+        .tabs button {
+            padding: 10px;
+            background-color: #eee;
+            border: none;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .tabs button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(tabId + '-btn').classList.add('active');
+        }
+        window.onload = () => showTab('production');
+    </script>
+</head>
+<body>
+    <h2>Submit Details</h2>
+    <div class="tabs">
+        <button id="production-btn" onclick="showTab('production')">Production</button>
+        <button id="erection-btn" onclick="showTab('erection')">Erection</button>
+    </div>
+
+    <div id="production" class="tab-content">
+        <form action="/submit" method="post">
+            <input type="hidden" name="tab" value="Production">
+            <label>Element:</label><br>
+            <input type="text" name="element" required><br>
+            <label>Element Type:</label><br>
+            <input type="text" name="element_type" required><br>
+            <label>Qty:</label><br>
+            <input type="number" name="qty" required><br>
+            <label>Confirm?</label>
+            <select name="confirm">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="erection" class="tab-content">
+        <form action="/submit" method="post">
+            <input type="hidden" name="tab" value="Erection">
+            <label>Element:</label><br>
+            <input type="text" name="element" required><br>
+            <label>Element Type:</label><br>
+            <input type="text" name="element_type" required><br>
+            <label>Qty:</label><br>
+            <input type="number" name="qty" required><br>
+            <label>Confirm?</label>
+            <select name="confirm">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
